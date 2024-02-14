@@ -10,7 +10,7 @@ import (
 // from the HTTP request headers
 // Example:
 // Authorization: ApiKey {key}
-func getAPIKey(headers http.Header) (string, error) {
+func GetAPIKey(headers http.Header) (string, error) {
 	val := headers.Get("Authorization")
 	if val == "" {
 		return "", errors.New("no Authorization header")
