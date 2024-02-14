@@ -39,7 +39,7 @@ func (apiCfg *apiConfig) handlerCreateUser(w http.ResponseWriter, r *http.Reques
 }
 
 func (apiCfg *apiConfig) handlerGetUser(w http.ResponseWriter, r *http.Request) {
-	apiKey, err := auth.GetAPIkey(r.Header)
+	apiKey, err := auth.GetAPIKey(r.Header)
 	if err != nil {
 		respondWithError(w, http.StatusUnauthorized, fmt.Sprint("Error getting API key: ", err))
 		return
@@ -47,7 +47,7 @@ func (apiCfg *apiConfig) handlerGetUser(w http.ResponseWriter, r *http.Request) 
 
 	user, err := apiCfg.DB.GetUserByAPIKey(r.Context(), apiKey)
 	if err != nil {
-		respondWithError(w, http.StatusInternalServerError, fmt.Sprint("Error getting user: ", err))
+		respondWithError(w, http.StatusBadRequest, fmt.Sprint("Error getting user: ", err))
 		return
 	}
 
