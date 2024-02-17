@@ -33,13 +33,19 @@ func (apiCfg *apiConfig) handlerCreateFeed(w http.ResponseWriter, r *http.Reques
 		UserID:    user.ID,
 	})
 	if err != nil {
-		respondWithError(w, http.StatusInternalServerError, fmt.Sprint("Error creating feed: ", err))
+		respondWithError(w, http.StatusBadRequest, fmt.Sprint("Error creating feed: ", err))
 		return
 	}
 
 	respondWithJSON(w, http.StatusCreated, databaseFeedToFeed(feed))
 }
 
-func (apiCfg *apiConfig) handlerGetFeed(w http.ResponseWriter, r *http.Request, f database.Feed) {
-	respondWithJSON(w, http.StatusOK, databaseFeedToFeed(f))
+func (apiCfg *apiConfig) handlerGetFeeds(w http.ResponseWriter, r *http.Request) {
+	feed, err := apiCfg.DB.GetFeeds(r.Context())
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, fmt.Sprint("Error getting feeds: ", err))
+		return
+	}
+
+	respondWithJSON(w, http.StatusOK, databaseFeedsToFeeds(feed))
 }
