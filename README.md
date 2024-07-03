@@ -1,5 +1,5 @@
-# RSS Feed Aggregator
+# RSS Aggregator
 
 ## Description
 
-The RSS Feed Aggregator is a simple back-end server which aggregates posts from RSS feeds and saves them in the database.
+The RSS Aggregator is a backend server designed to aggregate data from various RSS feeds and save them in a database.
